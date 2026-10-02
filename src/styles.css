@@ -458,3 +458,133 @@ input[type="date"],
   .countdown-card { padding: 22px 24px; }
   .legend { grid-template-columns: repeat(5, auto); justify-content: space-between; }
 }
+
+
+.home-link-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 42px 1fr 20px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  border: 1px solid #cfe0f3;
+  border-radius: 14px;
+  background: #eef6ff;
+  color: #173b65;
+  text-align: left;
+}
+
+.home-link-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: white;
+  font-size: 1.15rem;
+}
+
+.home-link-copy {
+  display: grid;
+  gap: 3px;
+}
+
+.home-link-copy strong {
+  font-size: .95rem;
+}
+
+.home-link-copy small {
+  color: #60738a;
+}
+
+.home-link-chevron {
+  font-size: 1.5rem;
+  color: #4f77a5;
+}
+
+.suggestion-block {
+  display: grid;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.suggestion-label {
+  color: #6a788b;
+  font-size: .78rem;
+  font-weight: 600;
+}
+
+.suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.suggestion-chip {
+  min-height: 34px;
+  padding: 6px 11px;
+  border: 1px solid #cfdbe8;
+  border-radius: 999px;
+  background: #fff;
+  color: #315f91;
+  font-size: .82rem;
+  font-weight: 700;
+}
+
+.suggestion-chip.selected {
+  border-color: #1268d6;
+  background: #eaf4ff;
+  color: #0d5dbd;
+}
+
+.pattern-settings-card {
+  display: grid;
+  grid-template-columns: 18px 1fr 20px;
+  gap: 10px;
+}
+
+.pattern-settings-card > span:first-child {
+  display: block;
+}
+
+.pattern-card-copy {
+  display: grid !important;
+  gap: 5px;
+}
+
+.pattern-accent {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+}
+
+.pattern-accent-1 { background: #3dbb6f; }
+.pattern-accent-2 { background: #ff941f; }
+.pattern-accent-3 { background: #4f8fe8; }
+
+.calendar-title-hint {
+  margin: 3px 0 0;
+  color: #7b8797;
+  font-size: .72rem;
+}
+
+.jump-buttons {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.jump-buttons button {
+  white-space: nowrap;
+  font-size: .78rem;
+}
+
+@media (max-width: 420px) {
+  .calendar-title-row {
+    align-items: flex-start;
+  }
+
+  .jump-buttons {
+    max-width: 190px;
+  }
+}

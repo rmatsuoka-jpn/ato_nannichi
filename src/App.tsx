@@ -19,6 +19,8 @@ const makeId = () =>
     ? crypto.randomUUID()
     : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
+const targetNameSuggestions = ['年度末', 'イベント', '契約終了', '任期終了', '引っ越し'];
+
 const defaultPattern = (): CountPattern => ({
   id: makeId(),
   name: '出勤日',
@@ -213,6 +215,15 @@ function SettingsPage({ data, setData }: Omit<PageProps, 'currentKey'>) {
     <>
       <Header title="設定" back="/" />
       <main className="page">
+        <button className="home-link-card" onClick={() => go('/')}>
+          <span className="home-link-icon" aria-hidden="true">📅</span>
+          <span className="home-link-copy">
+            <strong>カウント画面を表示</strong>
+            <small>残り日数の一覧へ戻る</small>
+          </span>
+          <span className="home-link-chevron" aria-hidden="true">›</span>
+        </button>
+
         <section className="section">
           <h2>目標一覧</h2>
           <div className="settings-list">
@@ -318,7 +329,22 @@ function TargetEditor({ data, setData, targetId }: Omit<PageProps, 'currentKey'>
         <section className="section form-section">
           <label>
             名前
-            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="例：浦添勤務終了" />
+            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="例：年度末、イベントなど" />
+            <div className="suggestion-block">
+              <span className="suggestion-label">よく使う名前</span>
+              <div className="suggestion-chips">
+                {targetNameSuggestions.map((suggestion) => (
+                  <button
+                    type="button"
+                    className={`suggestion-chip ${name === suggestion ? 'selected' : ''}`}
+                    key={suggestion}
+                    onClick={() => setName(suggestion)}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
+            </div>
           </label>
 
           <label>
@@ -331,13 +357,14 @@ function TargetEditor({ data, setData, targetId }: Omit<PageProps, 'currentKey'>
           <section className="section">
             <h2>カウントパターン</h2>
             <div className="settings-list">
-              {existing.patterns.map((pattern) => (
+              {existing.patterns.map((pattern, index) => (
                 <button
-                  className="settings-card"
+                  className="settings-card pattern-settings-card"
                   key={pattern.id}
                   onClick={() => go(`/pattern/${existing.id}/${pattern.id}`)}
                 >
-                  <span>
+                  <span className={`pattern-accent pattern-accent-${index + 1}`} aria-hidden="true" />
+                  <span className="pattern-card-copy">
                     <strong>{pattern.name}</strong>
                     <small>{patternSummary(pattern)}</small>
                   </span>
@@ -527,10 +554,13 @@ function CalendarEditor({
   return (
     <section className="section calendar-section">
       <div className="calendar-title-row">
-        <h2>個別に変更</h2>
+        <div>
+          <h2>個別に変更</h2>
+          <p className="calendar-title-hint">表示する月を移動できます</p>
+        </div>
         <div className="jump-buttons">
-          <button onClick={() => jump(currentKey)}>今日</button>
-          <button onClick={() => jump(target.finalDate)}>最終日</button>
+          <button onClick={() => jump(currentKey)} aria-label="今日がある月を表示">今日を表示</button>
+          <button onClick={() => jump(target.finalDate)} aria-label="最終日がある月を表示">最終日を表示</button>
         </div>
       </div>
 
